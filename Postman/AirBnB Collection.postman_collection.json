@@ -1,0 +1,87 @@
+{
+	"info": {
+		"_postman_id": "77f8b9ad-13d1-437e-ba9f-bdf1755601be",
+		"name": "AirBnB Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28683501"
+	},
+	"item": [
+		{
+			"name": "Neighbourhoods",
+			"item": [
+				{
+					"name": "Individual-Neighbourhoods",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/neighbourhoods?location=Pacific Beach",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"neighbourhoods"
+							],
+							"query": [
+								{
+									"key": "location",
+									"value": "Pacific Beach"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Base-Neighbourhoods",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/neighbourhoods",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"neighbourhoods"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Base URL",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
