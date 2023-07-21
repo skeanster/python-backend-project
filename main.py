@@ -9,7 +9,7 @@ db = mysql.connector.connect(
     database="san_diego_airbnb_data"
 )
 
-mycursor = db.cursor()
+cursor = db.cursor()
 
 app = Flask(__name__)
 api = Api(app)
@@ -24,18 +24,29 @@ class Home(Resource):
 class Neighbourhoods(Resource):
     def get(self):
         result = []
+        location = request.args.get("location")
 
-        mycursor.execute(
+        if location:
+            cursor.execute(
+                "SELECT * FROM sd_listings WHERE neighbourhood = '" + location + "';")
+
+            columns = [col[0] for col in cursor.description]
+            for x in cursor:
+                result.append(dict(zip(columns, x)))
+
+            return jsonify(result)
+
+        cursor.execute(
             "SELECT neighbourhood, COUNT(id) FROM sd_listings GROUP BY neighbourhood")
 
-        for x in mycursor:
+        for x in cursor:
             obj = {
                 "neighbourhood": x[0],
                 "listingsCount": x[1]
             }
             result.append(obj)
 
-        return result
+        return jsonify(result)
 
 
 api.add_resource(Home, "/")
