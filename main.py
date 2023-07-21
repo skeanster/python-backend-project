@@ -49,8 +49,35 @@ class Neighbourhoods(Resource):
         return jsonify(result)
 
 
+class ListingsByPrice(Resource):
+    def get(self):
+        result = []
+        sql = "SELECT * FROM sd_listings WHERE 1"
+        minprice = request.args.get("minprice")
+        maxprice = request.args.get("maxprice")
+        location = request.args.get("location")
+
+        if maxprice:
+            sql = sql + " AND price < "+maxprice+""
+
+        if minprice:
+            sql = sql + " AND price > "+minprice+""
+
+        if location:
+            sql = sql + " AND neighbourhood = '"+location+"'"
+
+        cursor.execute(sql)
+        columns = [col[0] for col in cursor.description]
+
+        for x in cursor:
+            result.append(dict(zip(columns, x)))
+
+        return jsonify(result)
+
+
 api.add_resource(Home, "/")
 api.add_resource(Neighbourhoods, "/neighbourhoods")
+api.add_resource(ListingsByPrice, "/listingsByPrice")
 
 
 if __name__ == "__main__":

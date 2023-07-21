@@ -62,6 +62,47 @@
 			]
 		},
 		{
+			"name": "ListingsByPrice",
+			"item": [
+				{
+					"name": "max-min-price",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/listingsByPrice?minprice=600&location=La Jolla&maxprice=750",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"listingsByPrice"
+							],
+							"query": [
+								{
+									"key": "minprice",
+									"value": "600"
+								},
+								{
+									"key": "location",
+									"value": "La Jolla"
+								},
+								{
+									"key": "maxprice",
+									"value": "750"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Base URL",
 			"request": {
 				"method": "GET",
