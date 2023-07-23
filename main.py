@@ -51,7 +51,7 @@ class Neighbourhoods(Resource):
 
 class ListingsByPrice(Resource):
     def get(self):
-        result = []
+        result = {"count": 0, "listings": []}
         sql = "SELECT * FROM sd_listings WHERE 1"
         minprice = request.args.get("minprice")
         maxprice = request.args.get("maxprice")
@@ -70,7 +70,8 @@ class ListingsByPrice(Resource):
         columns = [col[0] for col in cursor.description]
 
         for x in cursor:
-            result.append(dict(zip(columns, x)))
+            result["listings"].append(dict(zip(columns, x)))
+            result["count"] = result["count"] + 1
 
         return jsonify(result)
 
