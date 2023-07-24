@@ -70,7 +70,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/listingsByPrice?minprice=600&location=La Jolla&maxprice=750",
+							"raw": "http://127.0.0.1:5000/listingsByPrice?minprice=700&location=La Jolla&maxprice=750",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -85,7 +85,7 @@
 							"query": [
 								{
 									"key": "minprice",
-									"value": "600"
+									"value": "700"
 								},
 								{
 									"key": "location",
@@ -95,6 +95,116 @@
 									"key": "maxprice",
 									"value": "750"
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "get all users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/users",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/users?name=Mark&primaryNeighbourhood=Pacific Beach",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Mark"
+								},
+								{
+									"key": "primaryNeighbourhood",
+									"value": "Pacific Beach"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get individual user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/users/4",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/users/3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"3"
 							]
 						}
 					},
