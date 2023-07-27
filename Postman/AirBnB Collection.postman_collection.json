@@ -130,7 +130,7 @@
 				{
 					"name": "create user",
 					"request": {
-						"method": "PUT",
+						"method": "POST",
 						"header": [],
 						"url": {
 							"raw": "http://127.0.0.1:5000/users?name=Mark&primaryNeighbourhood=Pacific Beach",
@@ -205,6 +205,137 @@
 							"path": [
 								"users",
 								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Saved Listings",
+			"item": [
+				{
+					"name": "Get All Saved Listings",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/savedListings",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"savedListings"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Saved Listings User",
+			"item": [
+				{
+					"name": "Get users saved listings",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/savedListings/4",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"savedListings",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add to saved listings",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"listingId\": 795905\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/savedListings/4",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"savedListings",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete saved listing",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"listingId\": 795905\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/savedListings/8",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"savedListings",
+								"8"
 							]
 						}
 					},
