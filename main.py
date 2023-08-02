@@ -3,6 +3,7 @@ from flask import Flask, request, jsonify, Response
 from flask_restful import Api, Resource
 import mysql.connector
 import datetime
+from collections import defaultdict
 
 db = mysql.connector.connect(
     host="localhost",
@@ -135,20 +136,25 @@ class User(Resource):
 
 class SavedListings(Resource):
     def get(self):
-        result = {
-            "savedListings": []
-        }
-        columns = ["id", "listing_id", "user_id", "date_saved"]
+        result = []
+        grouped_data = defaultdict(list)
+        columns = ["id", "listing_id", "user_id"]
 
-        cursor.execute("SELECT * FROM saved_listings")
+        cursor.execute("SELECT id, listing_id, user_id FROM saved_listings")
 
         for x in cursor:
-            result["savedListings"].append(dict(zip(columns, x)))
+            item = (dict(zip(columns, x)))
+            user_id = item['user_id']
+            grouped_data[user_id].append(item)
 
-        json_result = json.dumps(
-            result["savedListings"], cls=CustomJSONEncoder)
+        for user_id, items in grouped_data.items():
+            user_object = {
+                'user_id': user_id,
+                'userSavedListings': items
+            }
+            result.append(user_object)
 
-        return Response(json_result, content_type='application/json')
+        return jsonify(result)
 
 
 class SavedListingsUser(Resource):

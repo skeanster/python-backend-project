@@ -70,7 +70,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/listingsByPrice?minprice=700&location=La Jolla&maxprice=750",
+							"raw": "http://127.0.0.1:5000/listingsByPrice?minprice=700&maxprice=750",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -89,7 +89,8 @@
 								},
 								{
 									"key": "location",
-									"value": "La Jolla"
+									"value": "La Jolla",
+									"disabled": true
 								},
 								{
 									"key": "maxprice",
@@ -284,7 +285,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"listingId\": 795905\n\n}",
+							"raw": "{\n    \"listingId\": 108349\n\n}",
 							"options": {
 								"raw": {
 									"language": "json"
