@@ -1,19 +1,11 @@
 import json
 from flask import Flask, request, jsonify, Response
 from flask_restful import Api, Resource
-import mysql.connector
+from common import db_connector
 import datetime
 from collections import defaultdict
 
-db = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    passwd="rootpassword",
-    database="san_diego_airbnb_data"
-)
-
-cursor = db.cursor()
-
+db, cursor = db_connector.DBConnector.connect()
 app = Flask(__name__)
 api = Api(app)
 
@@ -120,7 +112,8 @@ class User(Resource):
         result = []
         columns = ["id", "name", "primaryNeighbourhood"]
 
-        cursor.execute("SELECT * FROM users WHERE id = "+user_id+";")
+        cursor.execute(
+            "SELECT * FROM users WHERE id = "+user_id+";")
 
         for x in cursor:
             result.append(dict(zip(columns, x)))
@@ -128,7 +121,8 @@ class User(Resource):
         return jsonify(result)
 
     def delete(self, user_id):
-        cursor.execute("DELETE FROM users WHERE id = "+user_id+";")
+        cursor.execute(
+            "DELETE FROM users WHERE id = "+user_id+";")
         db.commit()
 
         return "user deleted", 204
@@ -140,7 +134,8 @@ class SavedListings(Resource):
         grouped_data = defaultdict(list)
         columns = ["id", "listing_id", "user_id"]
 
-        cursor.execute("SELECT id, listing_id, user_id FROM saved_listings")
+        cursor.execute(
+            "SELECT id, listing_id, user_id FROM saved_listings")
 
         for x in cursor:
             item = (dict(zip(columns, x)))
