@@ -9,19 +9,32 @@ db, cursor = db_connector.DBConnector.connect()
 
 class SavedListingsUser(Resource):
     def get(self, user_id):
-        result = {
-            "savedListings": []
-        }
-        columns = ["id", "listing_id", "user_id", "date_saved"]
+        includeDetails = request.args.get("includeDetails")
+        result = []
 
-        cursor.execute(
-            "SELECT * FROM saved_listings WHERE user_id = "+user_id+";")
+        if includeDetails == "true":
+            columns = ["user_id", "listing_id", "name",
+                       "host_id", "neighbourhood", "price"]
+
+            cursor.execute("""
+                SELECT saved_listings.user_id, saved_listings.listing_id, sd_listings.name, sd_listings.host_id, sd_listings.neighbourhood, sd_listings.price
+                FROM saved_listings
+                INNER JOIN sd_listings ON sd_listings.id = saved_listings.listing_id
+                WHERE user_id = %s;
+                """, (user_id,)
+            )
+
+        else:
+            columns = ["id", "listing_id", "user_id", "date_saved"]
+
+            cursor.execute(
+                "SELECT * FROM saved_listings WHERE user_id = %s;", (user_id,))
 
         for x in cursor:
-            result["savedListings"].append(dict(zip(columns, x)))
+            result.append(dict(zip(columns, x)))
 
         json_result = json.dumps(
-            result["savedListings"], cls=CustomJSONEncoder)
+            result, cls=CustomJSONEncoder)
 
         return Response(json_result, content_type='application/json')
 
@@ -32,7 +45,7 @@ class SavedListingsUser(Resource):
         sql_date = todaysDate.strftime('%Y-%m-%d')
 
         cursor.execute(
-            f"SELECT * from saved_listings WHERE listing_id = {listing_id} AND user_id = {user_id}; ")
+            "SELECT * from saved_listings WHERE listing_id = %s AND user_id = %s;", (listing_id, user_id))
 
         for x in cursor:
             if x[0]:
