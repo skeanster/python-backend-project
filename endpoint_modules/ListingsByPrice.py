@@ -14,15 +14,27 @@ class ListingsByPrice(Resource):
         location = request.args.get("location")
 
         if maxprice:
-            sql = sql + " AND price < "+maxprice+""
+            sql += " AND price < %s"
 
         if minprice:
-            sql = sql + " AND price > "+minprice+""
+            sql += " AND price > %s"
 
         if location:
-            sql = sql + " AND neighbourhood = '"+location+"'"
+            sql += " AND neighbourhood = %s"
 
-        cursor.execute(sql)
+        params = []
+
+        if maxprice:
+            params.append(maxprice)
+
+        if minprice:
+            params.append(minprice)
+
+        if location:
+            params.append(location)
+
+        cursor.execute(sql, params)
+
         columns = [col[0] for col in cursor.description]
 
         for x in cursor:
