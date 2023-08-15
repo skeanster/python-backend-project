@@ -11,9 +11,16 @@ class Neighbourhoods(Resource):
     def get(self):
         result = []
         location = request.args.get("location")
+        numReviews = 0
+
+        if request.args.get("numReviews"):
+            numReviews = request.args.get("numReviews")
 
         if location:
-            listings = SDListing.query.filter_by(neighbourhood=location).all()
+            listings = SDListing.query.filter(
+                SDListing.neighbourhood == location,
+                SDListing.number_of_reviews >= numReviews
+            ).all()
 
             result = [row2dict(listing) for listing in listings]
 
