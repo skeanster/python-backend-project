@@ -15,7 +15,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/neighbourhoods?location=Pacific Beach",
+							"raw": "http://127.0.0.1:5000/neighbourhoods?location=La Jolla&numReviews=309",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -30,7 +30,11 @@
 							"query": [
 								{
 									"key": "location",
-									"value": "Pacific Beach"
+									"value": "La Jolla"
+								},
+								{
+									"key": "numReviews",
+									"value": "309"
 								}
 							]
 						}
@@ -134,7 +138,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/users?name=Mark&primaryNeighbourhood=Pacific Beach",
+							"raw": "http://127.0.0.1:5000/users?name=Matt&primaryNeighbourhood=Del Mar Heights",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -149,11 +153,11 @@
 							"query": [
 								{
 									"key": "name",
-									"value": "Mark"
+									"value": "Matt"
 								},
 								{
 									"key": "primaryNeighbourhood",
-									"value": "Pacific Beach"
+									"value": "Del Mar Heights"
 								}
 							]
 						}
@@ -171,7 +175,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/users/4",
+							"raw": "http://127.0.0.1:5000/users/8",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -182,14 +186,14 @@
 							"port": "5000",
 							"path": [
 								"users",
-								"4"
+								"8"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "Delete User",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -261,7 +265,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/savedListings/4",
+							"raw": "http://127.0.0.1:5000/savedListings/4?includeDetails=true",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -273,6 +277,12 @@
 							"path": [
 								"savedListings",
 								"4"
+							],
+							"query": [
+								{
+									"key": "includeDetails",
+									"value": "true"
+								}
 							]
 						}
 					},
