@@ -12,25 +12,18 @@ class ListingsByPrice(Resource):
         minprice = request.args.get("minprice")
         maxprice = request.args.get("maxprice")
         location = request.args.get("location")
-
-        if maxprice:
-            sql += " AND price < %s"
-
-        if minprice:
-            sql += " AND price > %s"
-
-        if location:
-            sql += " AND neighbourhood = %s"
-
         params = []
 
         if maxprice:
+            sql += " AND price < %s"
             params.append(maxprice)
 
         if minprice:
+            sql += " AND price > %s"
             params.append(minprice)
 
         if location:
+            sql += " AND neighbourhood = %s"
             params.append(location)
 
         cursor.execute(sql, params)
