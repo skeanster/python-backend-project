@@ -11,7 +11,7 @@ class User(Resource):
         columns = ["id", "name", "primaryNeighbourhood"]
 
         cursor.execute(
-            "SELECT * FROM users WHERE id = "+user_id+";")
+            "SELECT * FROM users WHERE id = %s;", (user_id,))
 
         for x in cursor:
             result.append(dict(zip(columns, x)))
@@ -20,7 +20,7 @@ class User(Resource):
 
     def delete(self, user_id):
         cursor.execute(
-            "DELETE FROM users WHERE id = "+user_id+";")
+            "DELETE FROM users WHERE id = %s;", (user_id,))
         db.commit()
 
         return "user deleted", 204
